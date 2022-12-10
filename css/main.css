@@ -1,0 +1,197 @@
+html {
+    width: 1000px;
+}
+div {
+    border: 1px none black;
+}
+table {
+    width: 125px;
+    height: 200px;
+    border-collapse: collapse;
+}
+
+.main {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.timer_row {
+    width: inherit;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    margin-bottom: 20px;
+}
+
+.pattern {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    text-align: center;
+    font-size: 100px;
+    color: white;
+    text-shadow: -4px 0 #000, 0 4px #000, 4px 0 #000, 0 -4px #000;
+}
+
+.one {
+    background-image: url("../resource/img/power.gif");
+}
+.two {
+    background-image: url("../resource/img/cross.gif");
+}
+
+.timer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.seven_segemnt {
+    width: 125px;
+    height: 200px;
+    display: table-cell;
+    margin: 0 auto;
+}
+
+.ones_place {
+
+}
+.ten_place {
+
+}
+
+
+.segment_top.t_0 {
+    border-top: 10px black solid;
+    border-left: 10px black solid;
+    border-right: 10px black solid;
+}
+.segment_bottom.t_0 {
+    border-bottom: 10px black solid;
+    border-left: 10px black solid;
+    border-right: 10px black solid;
+}
+
+.segment_top.t_1 {
+    border-right: 10px black solid;
+}
+.segment_bottom.t_1 {
+    border-right: 10px black solid;
+}
+
+.segment_top.t_2 {
+    border-top: 10px black solid;
+    border-bottom: 10px black solid;
+    border-right: 10px black solid;
+}
+.segment_bottom.t_2 {
+    border-top: 10px black solid;
+    border-bottom: 10px black solid;
+    border-left: 10px black solid;
+}
+
+.segment_top.t_3 {
+    border-top: 10px black solid;
+    border-bottom: 10px black solid;
+    border-right: 10px black solid;
+}
+.segment_bottom.t_3 {
+    border-top: 10px black solid;
+    border-bottom: 10px black solid;
+    border-right: 10px black solid;
+}
+
+.segment_top.t_4 {
+    border-bottom: 10px black solid;
+    border-left: 10px black solid;
+    border-right: 10px black solid;
+}
+.segment_bottom.t_4 {
+    border-top: 10px black solid;
+    border-right: 10px black solid;
+}
+
+.segment_top.t_5 {
+    border-top: 10px black solid;
+    border-bottom: 10px black solid;
+    border-left: 10px black solid;
+}
+.segment_bottom.t_5 {
+    border-top: 10px black solid;
+    border-bottom: 10px black solid;
+    border-right: 10px black solid;
+}
+
+.segment_top.t_6 {
+    border-top: 10px black solid;
+    border-bottom: 10px black solid;
+    border-left: 10px black solid;
+}
+.segment_bottom.t_6 {
+    border-top: 10px black solid;
+    border-bottom: 10px black solid;
+    border-left: 10px black solid;
+    border-right: 10px black solid;
+}
+
+.segment_top.t_7 {
+    border-top: 10px black solid;
+    border-right: 10px black solid;
+}
+.segment_bottom.t_7 {
+    border-right: 10px black solid;
+}
+
+.segment_top.t_8 {
+    border-top: 10px black solid;
+    border-bottom: 10px black solid;
+    border-left: 10px black solid;
+    border-right: 10px black solid;
+}
+.segment_bottom.t_8 {
+    border-top: 10px black solid;
+    border-bottom: 10px black solid;
+    border-left: 10px black solid;
+    border-right: 10px black solid;
+}
+
+.segment_top.t_9 {
+    border-top: 10px black solid;
+    border-bottom: 10px black solid;
+    border-left: 10px black solid;
+    border-right: 10px black solid;
+}
+.segment_bottom.t_9 {
+    border-top: 10px black solid;
+    border-bottom: 10px black solid;
+    border-right: 10px black solid;
+}
+
+
+
+input {
+    font-size: 20px;
+}
+.setting_column {
+    text-align: center;
+    font-size: 100px;
+}
+.setting_button {
+    height: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+
+.now_phase {
+    font-size: 100px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+
+.setting_command {
+    width: 500px;
+    height: 150px;
+    font-size: 150px;
+    margin-top: 18px;
+}

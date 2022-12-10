@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<title>jQuery</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link href="./css/main.css" rel="stylesheet" type="text/css">
+		<script>
+			var pattern_one = 71;
+			var pattern_two = 62;
+			var phase = 2;
+			var setSecond = 100;
+			var sec_one = pattern_one
+			var sec_two = pattern_two
+
+			var one_interval;
+			var two_interval;
+
+			$( document ).ready( function() {
+				$(".setting_command").focus()
+				segment(pattern_one, $(".pattern.one"))
+				segment(pattern_two, $(".pattern.two"))
+				$("#phase_2").on("click", function() {
+					pattern_one = 71;
+					pattern_two = 62;
+					timer_one_reset();
+					timer_two_reset();
+					$(".now_phase").text("2 페이즈")
+				});
+				$("#phase_3").on("click", function() {
+					pattern_one = 66;
+					pattern_two = 36;
+					timer_one_reset();
+					timer_two_reset();
+					$(".now_phase").text("3 페이즈")
+				});
+				$("#phase_4").on("click", function() {
+					pattern_one = 31;
+					pattern_two = 1;
+					timer_one_reset();
+					timer_two_reset();
+					$(".now_phase").text("4 페이즈");
+				});
+
+				$("#pattern_power").on("click", function() {
+					timer_one_reset();
+				});
+				$("#pattern_cross").on("click", function() {
+					timer_two_reset();
+				});
+
+				$(".setting_command").keyup(function(e) {
+					console.log(e.keyCode);
+					if(e.keyCode == 65) { // a
+						$("#phase_2").trigger("click");
+					}
+					else if(e.keyCode == 83) { // s
+						$("#phase_3").trigger("click");
+					}
+					else if(e.keyCode == 68) { // d
+						$("#phase_4").trigger("click");
+					}
+					else if(e.keyCode == 90) { // z
+						$("#pattern_power").trigger("click");
+					}
+					else if(e.keyCode == 88) { // x
+						$("#pattern_cross").trigger("click");
+					}
+					$(".setting_command").val("")
+				})
+			});
+
+			function timer_one_reset() {
+				$(".pattern.one").css("color", "white")
+				sec_one = pattern_one
+				clearInterval(one_interval);
+				one_interval = setInterval(timer_one, setSecond);
+			}
+
+			function timer_two_reset() {
+				$(".pattern.two").css("color", "white")
+				sec_two = pattern_two
+				clearInterval(two_interval);
+				two_interval = setInterval(timer_two, setSecond);
+			}
+
+			function timer_one(){
+				segment(sec_one, $(".pattern.one"))
+				sec_one = sec_one - 1;
+				if(sec_one == 10) {
+					var audio = new Audio("./resource/sound/power.mp3");
+					audio.play();
+					$(".pattern.one").css("color", "red")
+				}
+				if(sec_one == 0) {
+					sec_one = pattern_one
+					$(".pattern.one").css("color", "white")
+				}
+			}
+
+			function timer_two(){
+				segment(sec_two, $(".pattern.two"))
+				sec_two = sec_two - 1;
+				if(sec_two == 10) {
+					var audio = new Audio("./resource/sound/cross.mp3");
+					audio.play();
+					$(".pattern.two").css("color", "red")
+				}
+				if(sec_two == 0) {
+					sec_two = pattern_two
+					$(".pattern.two").css("color", "white")
+				}
+			}
+
+			function segment(time, target) {
+				var ones_place = time % 10
+				var ten_place = Math.floor(time / 10, 0)
+				var ten_top = target.next(".timer").children(".ten_place")
+					.children("table")
+					.children("tbody")
+					.children("tr")
+					.children(".segment_top")
+				var ten_bottom = target.next(".timer").children(".ten_place")
+					.children("table")
+					.children("tbody")
+					.children("tr")
+					.children(".segment_bottom")
+
+				var one_top = target.next(".timer").children(".ones_place")
+					.children("table")
+					.children("tbody")
+					.children("tr")
+					.children(".segment_top")
+				var one_bottom = target.next(".timer").children(".ones_place")
+					.children("table")
+					.children("tbody")
+					.children("tr")
+					.children(".segment_bottom")
+				if(time == 0) {
+					removeClass(ten_top)
+					removeClass(ten_bottom)
+					removeClass(one_top)
+					removeClass(one_bottom)
+					ten_top.addClass("t_0")
+					ten_bottom.addClass("t_0")
+					one_top.addClass("t_0")
+					one_bottom.addClass("t_0")
+				}
+				else {
+					removeClass(ten_top)
+					removeClass(ten_bottom)
+					removeClass(one_top)
+					removeClass(one_bottom)
+					ten_top.addClass("t_" + ten_place)
+					ten_bottom.addClass("t_" + ten_place)
+					one_top.addClass("t_" + ones_place)
+					one_bottom.addClass("t_" + ones_place)
+				}
+			}
+
+			function removeClass(target) {
+				target.removeClass("t_0")
+				target.removeClass("t_1")
+				target.removeClass("t_2")
+				target.removeClass("t_3")
+				target.removeClass("t_4")
+				target.removeClass("t_5")
+				target.removeClass("t_6")
+				target.removeClass("t_7")
+				target.removeClass("t_9")
+				target.removeClass("t_8")
+			}
+		</script>
+	</head>
+	<body>
+		<div class="now_phase">2 페이즈</div>
+		<div class="main">
+			<div class="patter_column">
+				<div class="timer_row">
+					<div class="pattern one">권능</div>
+					<div class="timer">
+						<div class="seven_segemnt ten_place">
+							<table>
+								<tr><td class="segment_top t_0"></td></tr>
+								<tr><td class="segment_bottom t_0"></td></tr>
+							</table>
+						</div>
+						<div class="seven_segemnt ones_place">
+							<table>
+								<tr><td class="segment_top t_0"></td></tr>
+								<tr><td class="segment_bottom t_0"></td></tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="timer_row">
+					<div class="pattern two">사선</div>
+					<div class="timer">
+						<div class="seven_segemnt ten_place">
+							<table>
+								<tr><td class="segment_top t_0"></td></tr>
+								<tr><td class="segment_bottom t_0"></td></tr>
+							</table>
+						</div>
+						<div class="seven_segemnt ones_place">
+							<table>
+								<tr><td class="segment_top t_0"></td></tr>
+								<tr><td class="segment_bottom t_0"></td></tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="timer_row">
+					<div class="pattern three"></div>
+					<div class="timer">
+						<div class="seven_segemnt ten_place">
+							<table>
+								<tr><td class="segment_top t_0"></td></tr>
+								<tr><td class="segment_bottom t_0"></td></tr>
+							</table>
+						</div>
+						<div class="seven_segemnt ones_place">
+							<table>
+								<tr><td class="segment_top t_0"></td></tr>
+								<tr><td class="segment_bottom t_0"></td></tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="setting_column" >
+				<div class="setting_title">페이즈</div>
+				<div class="setting_button">
+					<input type="button" class="phase_button" id="phase_2" value="2 페이즈 (a)">
+					<input type="button" class="phase_button" id="phase_3" value="3 페이즈 (s)">
+					<input type="button" class="phase_button" id="phase_4" value="4 페이즈 (d)">
+				</div>
+				<div class="setting_title">패턴 체크</div>
+				<div class="setting_button">
+					<input type="button" class="pattern_button" id="pattern_power" value="권능 (z)">
+					<input type="button" class="pattern_button" id="pattern_cross" value="사선 (x)">
+				</div>
+				<div class="setting_input">
+					<input type="text" class="setting_command">
+				</div>
+			</div>
+		</div>
+
+<!-- seven segment 예시
+		<div style="
+			width: 1000px;
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+			margin-bottom: 20px;
+		">
+			<table>
+				<tr><td class="segment_top t_0"></td></tr>
+				<tr><td class="segment_bottom t_0"></td></tr>
+			</table>
+			
+			<table>
+				<tr><td class="segment_top t_1"></td></tr>
+				<tr><td class="segment_bottom t_1"></td></tr>
+			</table>
+			
+			<table>
+				<tr><td class="segment_top t_2"></td></tr>
+				<tr><td class="segment_bottom t_2"></td></tr>
+			</table>
+			
+			<table>
+				<tr><td class="segment_top t_3"></td></tr>
+				<tr><td class="segment_bottom t_3"></td></tr>
+			</table>
+			
+			<table>
+				<tr><td class="segment_top t_4"></td></tr>
+				<tr><td class="segment_bottom t_4"></td></tr>
+			</table>
+		</div>
+		
+		<div style="
+			width: 1000px;
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+		">
+			<table>
+				<tr><td class="segment_top t_5"></td></tr>
+				<tr><td class="segment_bottom t_5"></td></tr>
+			</table>
+			<table>
+				<tr><td class="segment_top t_6"></td></tr>
+				<tr><td class="segment_bottom t_6"></td></tr>
+			</table>
+			
+			<table>
+				<tr><td class="segment_top t_7"></td></tr>
+				<tr><td class="segment_bottom t_7"></td></tr>
+			</table>
+			
+			<table>
+				<tr><td class="segment_top t_8"></td></tr>
+				<tr><td class="segment_bottom t_8"></td></tr>
+			</table>
+			
+			<table>
+				<tr><td class="segment_top t_9"></td></tr>
+				<tr><td class="segment_bottom t_9"></td></tr>
+			</table>
+		</div>
+-->
+	</body>
+</html>
